@@ -228,7 +228,15 @@
       color: #66ccff;
       font-weight: bold;
     }
-  </style>
+  
+section {
+  display: none;
+}
+section.active {
+  display: block;
+}
+
+</style>
 </head>
 <body>
 
@@ -246,7 +254,7 @@
   </header>
 
   <main>
-    <section id="about">
+    <section id="about" class="active">
       <h2>Sobre mí</h2>
       <p>
         Soy Guillermo Pereda, estudiante de la Licenciatura en Videojuegos y Simuladores de la Universidad Abierta Interamericana. Me especializo en el desarrollo de videojuegos utilizando Unity y Construct, con conocimientos de C# y C++. Me apasiona crear juegos simples pero interesantes, siempre enfocados en experiencias que yo mismo disfrutaría jugar. Aspiro a formar parte de un estudio profesional y seguir desarrollando mis propios proyectos de forma independiente.
@@ -365,5 +373,25 @@
   <footer>
     &copy; 2024 Guillermo Pereda. Todos los derechos reservados.
   </footer>
+
+<script>
+  document.querySelectorAll("nav a").forEach(link => {
+    link.addEventListener("click", e => {
+      e.preventDefault();
+      const targetId = link.getAttribute("href").replace("#", "");
+
+      document.querySelectorAll("main section").forEach(sec => {
+        sec.classList.remove("active");
+      });
+
+      const target = document.getElementById(targetId);
+      if (target) {
+        target.classList.add("active");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    });
+  });
+</script>
+
 </body>
 </html>
